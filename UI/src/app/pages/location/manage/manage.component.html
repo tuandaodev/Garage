@@ -1,0 +1,95 @@
+<div [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="primary" nbSpinnerMessage="Loading...">
+
+    <div class="row">
+        
+        <div class="col-md-4">
+            <nb-card>
+                <nb-card-header>
+                    Create New Garage Level
+                </nb-card-header>
+                <nb-card-body>
+            
+                    <div class="row" [formGroup]="formGroup">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="label">Level</label>
+                                <input id="driverName" type="number" nbInput fullWidth
+                                            formControlName="level"
+                                            placeholder="Enter level number"
+                                            ngxValidator="Level number"
+                                            >
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Width</label>
+                                <input id="maxX" type="number" nbInput fullWidth
+                                            formControlName="maxX"
+                                            placeholder="Enter width number"
+                                            ngxValidator="Width"
+                                            >
+                            </div>
+                            <div class="form-group">
+                                <label class="label">Length</label>
+                                <input id="maxY" type="number" nbInput fullWidth
+                                            formControlName="maxY"
+                                            placeholder="Enter length number"
+                                            ngxValidator="Length"
+                                            >
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-md-12 d-flex flex-row-reverse">
+                            <button id="btnSubmit" type="button" (click)="onSubmitCreateLocation()" nbButton status="primary" size="small">Create</button>
+                            <button id="btnClose" type="button" nbButton (click)="onResetForm()" size="small" class="mr-2">Reset</button>
+                        </div>
+                    </div>
+            
+                </nb-card-body>
+            </nb-card>
+        </div>
+
+        <div class="col-md-8" *ngIf="levels">
+            <nb-card>
+                <nb-card-header>
+                    Garage's Location Status
+                </nb-card-header>
+                <nb-card-body>
+            
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="label">Level</label>
+                                <nb-select fullWidth [(ngModel)]="levelId" (selectedChange)="onChangeLevel($event)" placeholder="Select level to view location status">
+                                    <nb-option *ngFor="let item of levels.slice().reverse()" [value]="item">Level {{item}}</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-md-12" *ngIf="levelId">
+                            <button type="button" (click)="onSubmitDeleteLevel()" nbButton status="danger" size="small">Delete Garage Level</button>
+                        </div>
+                    </div>
+            
+                    <div class="row mt-2">
+                        <div class="col-md-3 mb-2" *ngFor="let item of locations">
+                            <div class="location-item border border-success d-flex flex-column align-items-center justify-content-center" [class.busy]="item.licensePlate">
+                                <div><i>Location:</i> <span class="ml-2 font-weight-bolder text-primary">{{ item.locationCode }}</span></div>
+                                <ng-container *ngIf="item.licensePlate">
+                                    <div class="license-plate"><i>License plate:</i> <span class="ml-2 font-weight-bolder text-success">{{ item.licensePlate }}</span></div>
+                                    <div *ngIf="item?.vehicleTypeName"><i>Type:</i> <b class="ml-2">{{ item.vehicleTypeName }}</b></div>
+                                    <div><i>Checked in {{ item.createdDate | date:"dd/MM/yyyy HH:mm" }}</i></div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+            
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+    
+
+</div>
+
+
+

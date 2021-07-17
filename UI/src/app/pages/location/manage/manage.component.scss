@@ -1,0 +1,12 @@
+.location-item {
+    min-height: 90px;
+    text-align: center;
+
+    &.busy {
+        background: #ff8f8f;
+    }
+
+    .license-plate.span {
+        font-size: 20px;
+    }
+}

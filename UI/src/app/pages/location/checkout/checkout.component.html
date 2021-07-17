@@ -1,0 +1,50 @@
+<div method="POST" [nbSpinner]="isLoading" nbSpinnerSize="giant" nbSpinnerStatus="primary" nbSpinnerMessage="Loading...">
+    <div class="row" style="padding: 20px">
+        <div class="col-md-12">
+            <nb-card padding="0">
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="text-center mt-4 mb-2">Checkout</h4>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <label class="label mb-3" style="color: green">Enter/scan license plate</label>
+                                </div>
+                            </div>
+                            
+                            <div class="row d-flex justify-content-center mb-4">
+                                <div class="col-md-12 form-row">
+                                    <div class="col-md-12 form-group text-center">
+                                        <input nbInput fullWidth type="text"
+                                        [(ngModel)]="licensePlate" (keyup.enter)="onScan($event)"
+                                        placeholder="Enter/scan license plate" ngxAutoFocus
+                                        autocomplete="off">
+                                </div>
+
+                                    <button hero fullWidth type="button" id="btnScan" nbSuffix nbButton
+                                                (click)="onScan($event)" status="danger"
+                                                nbTooltip="Checkin">
+                                                <nb-icon icon="plus-circle-outline"></nb-icon> Checkout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 location-info d-flex flex-column align-self-center" *ngIf="checkoutResult">
+                            <div class="item mb-3">
+                                Location: <span class="location-code">{{ checkoutResult?.locationCode }}</span>
+                            </div>
+                            <div class="item mb-3">
+                                License Plate: <span class="location-code">{{ checkoutResult?.licensePlate }}</span>
+                            </div>
+                            <div class="item mb-3">
+                                Vehicle Type: <span class="location-code">{{ checkoutResult?.vehicleTypeName }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+    </div>
+
+</div>
